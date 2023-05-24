@@ -148,18 +148,16 @@ void MultiplicationGame(string message)
 void DivisionGame(string message)
 {
     Console.WriteLine(message);
-    var random = new Random();
-    int firstNum;
-    int secondNum;
     var score = 0;
 
     for (int i = 0; i < 5; i++)
     {
-        firstNum = random.Next(1, 9);
-        secondNum = random.Next(1, 9);
+        var divisionNumbers = GetDivisionNumbers();
+        var firstNum = divisionNumbers[0];
+        var secondNum = divisionNumbers[1];
 
         Console.WriteLine($"{firstNum} / {secondNum}");
-        var quot = firstNum + secondNum;
+        var quot = firstNum / secondNum;
         var userAnswer = Console.ReadLine();
 
         if (int.Parse(userAnswer) == quot)
@@ -183,13 +181,15 @@ int[] GetDivisionNumbers()
     var secondNumber = random.Next(0,99);
 
     var result = new int[2];
+
+    while (firstNumber % secondNumber != 0)
+    {
+        firstNumber = random.Next(1, 99);
+        secondNumber = random.Next(1, 99);
+    }
+
     result[0] = firstNumber;
     result[1] = secondNumber;
-
-    foreach (var number in result)
-    {
-        Console.WriteLine($"Array element = {number}");
-    }
 
     return result;
 }
